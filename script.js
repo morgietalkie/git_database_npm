@@ -13,15 +13,24 @@ function get() {
   })
     .then(e => e.json())
     .then(cars => {
-      cars.forEach(car => {
-        const template = document.querySelector("template").content;
-        const copy = template.cloneNode(true);
-        copy.querySelector("h1").textContent = car.name;
-        copy.querySelector("h2").textContent = car.type;
-        copy.querySelector("p").textContent = car.horsepowers;
-        document.querySelector(".app").appendChild(copy);
-      });
+      cars.forEach(addCarToTheDom);
     });
+}
+
+function addCarToTheDom(car) {
+  const template = document.querySelector("template").content;
+  const copy = template.cloneNode(true);
+  //   console.log(car._id);
+
+  copy.querySelector("h1").textContent = car.name;
+  copy.querySelector("h2").textContent = car.type;
+  copy.querySelector("p").textContent = car.horsepowers;
+  copy.querySelector(".removeCar").value = car._id;
+  copy.querySelector(".removeCar").addEventListener("click", () => {
+    removeCar(car._id);
+  });
+
+  document.querySelector(".app").appendChild(copy);
 }
 
 function post() {
@@ -42,20 +51,26 @@ function post() {
     body: postData
   })
     .then(res => res.json())
-    .then(data => console.log(data));
-
-  get();
+    .then(data => {
+      //   window.location = "";
+      console.log(data);
+      addCarToTheDom(data);
+    });
 }
 
-// function delete(id) {
-//     fetch("someurl/SOME_ID", {
-//         method: "delete",
-//         headers: {
-//           'Content-Type': 'application/json; charset=utf-8',
-//           'x-apikey': "your-cors-api-key",
-//           "cache-control": "no-cache"
-//         }
-//     })
-//       .then(res=>res.json())
-//       .then(data=>console.log(data));
-// }
+document.querySelector(".addCar").addEventListener("click", post);
+
+function removeCar(id) {
+  fetch(`https://myfirstdatabase-fe41.restdb.io/rest/cars/${id}`, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": "5d887457fd86cb75861e25fb",
+      "cache-control": "no-cache"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    });
+}
