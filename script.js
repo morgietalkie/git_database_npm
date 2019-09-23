@@ -22,6 +22,7 @@ function addCarToTheDom(car) {
   const copy = template.cloneNode(true);
   //   console.log(car._id);
 
+  copy.querySelector("article.car").dataset.carid = car._id;
   copy.querySelector("h1").textContent = car.name;
   copy.querySelector("h2").textContent = car.type;
   copy.querySelector("p").textContent = car.horsepowers;
@@ -30,7 +31,7 @@ function addCarToTheDom(car) {
     removeCar(car._id);
   });
 
-  document.querySelector(".app").appendChild(copy);
+  document.querySelector(".app").prepend(copy);
 }
 
 function post() {
@@ -71,6 +72,8 @@ function removeCar(id) {
   })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      // TODO: Delete from DOM.
+      console.log(document.querySelector(`.car[data-carid="${id}"]`));
+      document.querySelector(`.car[data-carid="${id}"]`).remove();
     });
 }
