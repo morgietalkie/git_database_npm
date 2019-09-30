@@ -6,6 +6,50 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  background: rgb(250, 250, 250);
+}
+
+#editform {
+  display: none;
+}
+
+.button_wrapper {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.reset_card_info,
+.removeCar,
+.edit {
+  border: 0;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.308);
+  color: white;
+  padding: 10px;
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+button:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+
+h1 {
+  font-size: 1.5em;
+  line-height: 27px;
+}
+h2,
+h3 {
+  font-size: 1em;
+  line-height: 27px;
 }
 
 a {
@@ -14,14 +58,199 @@ a {
   cursor: pointer;
 }
 
-.app > article:nth-child(odd) {
-  background: hotpink;
+label {
+  font-size: 0.9em;
+  color: hotpink;
 }
-.app > article:nth-child(even) {
+
+.title {
+  text-align: center;
+  margin: 50px;
+  color: hotpink;
+  text-transform: uppercase;
+  font-size: 3em;
+}
+
+.input_field {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  margin: 20px;
+}
+
+form > input {
+  margin: 5px 0;
+  background: rgb(247, 246, 246);
+  box-shadow: inset 0 0 2px rgb(206, 206, 206);
+  border: none;
+}
+
+form > input:last-child {
+  box-shadow: 0 0 2px rgb(206, 206, 206);
+  cursor: pointer;
+  background: hotpink;
+  color: white;
+  border-radius: 2px;
+  width: 50%;
+  margin: auto;
+}
+
+.card {
+  padding: 20px 10px;
+  border-radius: 2px;
+  background: hotpink;
+
+  box-shadow: rgba(167, 1, 84, 0.534) 0 0 3px;
+  text-align: right;
+  position: relative;
+  width: 300px;
+  margin: 20px;
+}
+
+.card h1 {
+  color: white;
+  text-align: left;
+}
+
+.card h2,
+.card h3,
+.card p {
+  color: rgba(255, 255, 255, 0.911);
+  text-align: left;
+}
+
+.app > article {
   background: rgb(255, 142, 198);
 }
+
+.app > article:nth-last-child(2n + 0) {
+  background: hotpink;
+}
+
 .app {
   display: grid;
   grid-template: auto / auto auto auto;
-  text-align: center;
+  gap: 30px;
+  padding: 10px;
+  transition: 2s;
+  width: 80%;
+  margin: 30px auto 50px;
+  opacity: 0;
+}
+
+.car {
+  padding: 20px 10px;
+  border-radius: 2px;
+  box-shadow: rgba(167, 1, 84, 0.534) 0 0 3px;
+  text-align: right;
+  line-height: 27px;
+  position: relative;
+}
+
+.car h1 {
+  color: white;
+  text-align: left;
+}
+
+.car h2,
+.car h3,
+.car p {
+  color: rgba(255, 255, 255, 0.911);
+  text-align: left;
+}
+
+.car:hover,
+.card:hover {
+  opacity: 0.9;
+}
+
+/* ANIMATIONS */
+
+@keyframes fade_out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade_in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade_in_out {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes car_updated {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.fade_out {
+  animation: fade_out 1s forwards;
+}
+
+.fade_in {
+  animation: fade_in 1s forwards;
+}
+
+.fade_in_out {
+  animation: fade_in_out 3s forwards;
+}
+
+.car_updated {
+  animation: car_updated 1.5s forwards;
+  animation-delay: 1s;
+}
+
+.info_box {
+  position: fixed;
+  background: rgba(109, 109, 109, 0.466);
+  border-radius: 2px;
+  color: white;
+  padding: 20px 10px;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  opacity: 0;
 }
